@@ -4,7 +4,7 @@ from tqdm import tqdm
 import getpass
 
 # مسیر درست ولوم روی RunPod
-BASE_CACHE_DIR = "/runpod-volume"
+BASE_CACHE_DIR = "/workspace"
 os.makedirs(BASE_CACHE_DIR, exist_ok=True)
 
 # گرفتن توکن از کاربر با امنیت
