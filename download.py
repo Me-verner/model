@@ -3,11 +3,11 @@ from huggingface_hub import snapshot_download, HfApi
 from tqdm import tqdm
 import getpass
 
-# مسیر اصلی کش داخل Volume
+# مسیر درست ولوم روی RunPod
 BASE_CACHE_DIR = "/runpod-volume"
 os.makedirs(BASE_CACHE_DIR, exist_ok=True)
 
-# دریافت امن توکن از کاربر
+# گرفتن توکن از کاربر با امنیت
 HF_TOKEN = getpass.getpass("🔐 Enter your Hugging Face token: ")
 
 # تست اعتبار توکن
@@ -19,6 +19,7 @@ except Exception as e:
     print(f"❌ Invalid token: {e}")
     exit(1)
 
+# لیست مدل‌ها
 MODELS = [
     "HiDream-ai/HiDream-I1-Full",
     "HiDream-ai/HiDream-I1-Dev",
@@ -29,10 +30,10 @@ MODELS = [
     "meta-llama/Llama-3.1-8B-Instruct"
 ]
 
-print(f"\n📦 Downloading models into separate folders in: {BASE_CACHE_DIR}\n")
+print(f"\n📦 Downloading models into: {BASE_CACHE_DIR}\n")
 
 for model_id in MODELS:
-    model_folder = model_id.replace("/", "--")  # ساخت نام پوشه امن
+    model_folder = model_id.replace("/", "--")  # پوشه امن برای هر مدل
     output_path = os.path.join(BASE_CACHE_DIR, model_folder)
 
     print(f"🔽 Downloading {model_id} → {output_path}")
@@ -49,4 +50,4 @@ for model_id in MODELS:
     except Exception as e:
         print(f"❌ Failed to download {model_id}: {e}\n")
 
-print("🎉 All models downloaded and organized.")
+print("🎉 All models downloaded successfully into /runpod-volume.")
